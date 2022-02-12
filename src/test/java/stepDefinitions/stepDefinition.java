@@ -5,6 +5,7 @@ import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
 import managers.Base;
+import org.apache.commons.logging.Log;
 import org.assertj.core.api.Assertions;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -12,21 +13,21 @@ import pages.LoginPage;
 
 public class stepDefinition extends Base {
 
-
-
     static String driverPath = System.getProperty("user.dir") + "/src/test/drivers/";
+    static LoginPage loginPage = getLoginPage();
 
-//    WebDriver driver;
-
-    @Given("^User is at login page$")
-    public void user_is_at_login_page() {
+    public static LoginPage getLoginPage() {
         System.out.println("Launching google chrome with new profile..");
-        System.setProperty("webdriver.chrome.driver", driverPath
-                + "chromedriver.exe");
+        System.setProperty("webdriver.chrome.driver", driverPath + "chromedriver.exe");
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
         driver.navigate().to("https://www.amazon.in/");
-        LoginPage loginPage = new LoginPage(driver);
+        return new LoginPage(driver);
+    }
+
+
+    @Given("^User is at login page$")
+    public void user_is_at_login_page() {
         loginPage.clickSignIn().click();
         Assertions.assertThat(loginPage.verifySignInTitle().getText().equals("Sign-In"));
     }

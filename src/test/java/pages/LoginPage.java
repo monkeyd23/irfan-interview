@@ -7,21 +7,14 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage extends Base {
 
-    private WebDriver driver;
+    private final WebDriver driver;
 
-    public LoginPage(WebDriver driver)
-    {
-//        super(driver);
+    public LoginPage(WebDriver driver) {
         this.driver = driver;
-//        PageFactory.initElements(driver, this);
     }
 
-//    @FindBy(xpath = "//*[@id='nav-link-accountList']") WebElement SIGN_IN;
     public By SIGN_IN = By.xpath("//*[@id='nav-link-accountList']");
-//    public WebElement regForm = driver.findElement(By.xpath("//*[@id='nav-link-accountList']"));
-//    @FindBy(xpath = "//*[@class='a-spacing-small']") public WebElement SIGN_IN_TITLE;
     public By SIGN_IN_TITLE = By.xpath("//*[@class='a-spacing-small']");
-
 
     public WebElement clickSignIn() {
         return driver.findElement(SIGN_IN);
